@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+		
+		<title>WeatherInfo</title>
+
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="{% static 'main/fonts/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="{% static 'main/style.css' %}">
+		
+		<!--[if lt IE 9]>
+		<script src="js/ie-support/html5.js"></script>
+		<script src="js/ie-support/respond.js"></script>
+		<![endif]-->
+
+	</head>
+
+
+	<body>
+		
+		<div class="site-content">
+			<div class="site-header">
+				<div class="container">
+					<a href="{% url 'main:home' %}" class="branding">
+						<img src="{% static 'main/images/logo.png' %}" alt="img" class="logo">
+						<div class="logo-type">
+							<h1 class="site-title">WeatherInfo</h1>
+							<small class="site-description">Know About Weather Around</small>
+						</div>
+					</a>
+
+
+
+					<div class="mobile-navigation"></div>
+
+				</div>
+			</div> <!-- .site-header -->
+
+			<div class="hero" data-bg-image="{% static 'main/images/banner1.jpg' %}">
+				<div class="container">
+					<form action="{% url 'main:home' %}" class="find-location" method="POST">
+                        {% csrf_token %}
+						<input type="text" placeholder="Find your location..." name="location">
+						<input type="submit" value="Find">
+					</form>
+
+				</div>
+			</div>
+			
+			<div class="forecast-table">
+				<div class="container">
+					<div class="forecast-container">
+						<div class="today forecast">
+							<div class="forecast-header">
+								<div class="day">{{day}}</div>
+								<div class="date">{{date}}</div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<div class="location">{{location}}</div>
+								<div class="degree">
+									<div class="num">{{cur_temp}}<sup>o</sup>C</div>
+									<div class="forecast-icon">
+										<img src="{% static 'main/images/icons/icon-1.svg' %}" alt="img" width=90>
+									</div>	
+								</div>
+								<span><img src="{% static 'main/images/icon-umberella.png' %}" alt="img">{{desc}}</span>
+								<span><img src="{% static 'main/images/icon-wind.png' %}" alt="img">{{wind_speed}}km/h</span>
+								<span><img src="{% static 'main/images/icon-compass.png' %}" alt="img">{{wind_dir}}</span>
+							</div>
+						</div>
+						<div class="forecast">
+							<div class="forecast-header">
+								<div class="day">Coordinates</div>
+							</div> <!-- .forecast-header -->
+
+							<div class="forecast-content">
+								<div class="forecast-icon">
+									<img src="{% static 'main/images/icons/equator.png' %}" alt="img" width=80>
+								</div>
+								<br>
+								<p><strong>Latitude</strong>: {{lat}}</p>
+								<p><strong>Longitude</strong>: {{lon}}</p>
+							</div>
+						</div>
+						<div class="forecast">
+							<div class="forecast-header">
+								<div class="day">Stats</div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<p><strong>Humidity</strong>: {{humidity}}%</p>
+								<p><strong>Precipitation</strong>: {{precip}}mm</p>
+								<p><strong>Pressure</strong>: {{pressure}}mb</p>
+								<p><strong>Cloud-Cover</strong>: {{cloudcover}}%</p>
+							</div>
+						</div>
+						<div class="forecast">
+							<div class="forecast-header">
+								<div class="day">Outside</div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<p><strong>Feels-Like</strong>: <small>{{feelslike}}<sup>o</sup></small></p>
+								<p><strong>UV Index</strong>: {{uv_index}}</p>
+								<p><strong>Visibility</strong>: {{visibility}}km</p>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+				<div class="fullwidth-block">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4">
+								<h2 class="section-title">Application features</h2>
+								<ul class="arrow-feature">
+									<li>
+										<h3>Get to know about the weather around you.</h3>
+										<p>You can check weather details of your locality in one click.</p>
+									</li>
+									<li>
+										<h3>Get current weather stats.</h3>
+										<p>You can check a variety of statistics about weather such as humidity,precipitation,wind speed,etc.</p>
+									</li>
+									<li>
+										<h3>Get weather info of other locations.</h3>
+										<p>You can check weather info of locations all over the world.</p>
+									</li>
+								</ul>
+							</div>
+							<div class="col-md-4">
+								<h2 class="section-title">Weather Analysis</h2>
+								<ul class="arrow-list">
+									<li>Check temperature.</li>
+									<li>Check wind speed and wind direction.</li>
+									<li>Check humidity and precipitation.</li>
+									<li>Check Pressure.</li>
+									<li>Check visibility and uv-index.</li>
+									<li>Check Pressure.</li>
+								</ul>
+							</div>
+							<div class="col-md-4">
+								<h2 class="section-title">Awesome Photos</h2>
+								<div class="photo-grid">
+									<a href="#"><img src="{% static 'main/images/rainy.jpg' %}" alt="#"></a>
+									<a href="#"><img src="{% static 'main/images/storm.jpg' %}" alt="#"></a>
+									<a href="#"><img src="{% static 'main/images/bright.jpg' %}" alt="#"></a>
+									<a href="#"><img src="{% static 'main/images/cloud.jpg' %}" alt="#"></a>
+									<a href="#"><img src="{% static 'main/images/sun.jpg' %}" alt="#"></a>
+									<a href="#"><img src="{% static 'main/images/snow.jpg' %}" alt="#"></a>
+									<a href="#"><img src="{% static 'main/images/mount.jpg' %}" alt="#"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main> <!-- .main-content -->
+
+			<footer class="site-footer">
+				<div style="text-align: center;">
+					<p class="colophon">Copyright 2023 WeatherInfo. Designed by Themezy. All rights reserved</p>
+				</div>
+			</footer> <!-- .site-footer -->
+		</div>
+		
+		<script src="{% static 'main/js/jquery-1.11.1.min.js'%}"></script>
+		<script src="{% static 'main/js/plugins.js' %}"></script>
+		<script src="{% static 'main/js/app.js' %}"></script>
+		
+	</body>
+
+</html>
